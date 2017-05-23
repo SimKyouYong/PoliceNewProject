@@ -115,7 +115,7 @@ public class SlideNotActivity extends Activity {
 		// 광고 클릭시 실행할 리스너
 		adView.setOnAdClickedListener(new OnAdClickedListener() {
 			public void OnAdClicked() {
-				Log.i(LOGTAG, "광고를 클릭했습니다.");
+				Log.i("SKY", "광고를 클릭했습니다.");
 			}
 		});
 
@@ -123,6 +123,7 @@ public class SlideNotActivity extends Activity {
 		adView.setOnAdFailedListener(new OnAdFailedListener() {
 			public void OnAdFailed(AdError arg0, String arg1) {
 				adWrapper.setVisibility(View.INVISIBLE);
+				Log.e("SKY", "setOnAdFailedListener :: " + arg0.toString());
 				Log.e("SKY", "setOnAdFailedListener :: " + arg1);
 			}
 		});
@@ -132,21 +133,21 @@ public class SlideNotActivity extends Activity {
 			public void OnAdLoaded() {
 				// 광고 제거
 				adWrapper.setVisibility(View.VISIBLE);
-				Log.e(LOGTAG, "광고가 정상적으로 로딩되었습니다.");
+				Log.e("SKY", "광고가 정상적으로 로딩되었습니다.");
 			}
 		});
 
 		// 광고를 불러올때 실행할 리스너
 		adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
 			public void OnAdWillLoad(String arg1) {
-				Log.e(LOGTAG, "광고를 불러옵니다. : " + arg1);
+				Log.e("SKY", "광고를 불러옵니다. : " + arg1);
 			}
 		});
 
 		// 광고를 닫았을때 실행할 리스너
 		adView.setOnAdClosedListener(new OnAdClosedListener() {
 			public void OnAdClosed() {
-				Log.e(LOGTAG, "광고를 닫았습니다.");
+				Log.e("SKY", "광고를 닫았습니다.");
 			}
 		});
 
