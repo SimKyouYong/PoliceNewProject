@@ -7,16 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
-import net.daum.adam.publisher.AdInterstitial;
-import net.daum.adam.publisher.AdView;
-import net.daum.adam.publisher.AdView.AnimationType;
-import net.daum.adam.publisher.AdView.OnAdClickedListener;
-import net.daum.adam.publisher.AdView.OnAdClosedListener;
-import net.daum.adam.publisher.AdView.OnAdFailedListener;
-import net.daum.adam.publisher.AdView.OnAdLoadedListener;
-import net.daum.adam.publisher.AdView.OnAdWillLoadListener;
-import net.daum.adam.publisher.impl.AdError;
+import com.kakao.adfit.publisher.AdView.*;
+import com.kakao.adfit.publisher.AdView;
+import com.kakao.adfit.publisher.impl.AdError;
 
 import sjy.policenewproject.common.Check_Preferences;
 
@@ -52,8 +45,8 @@ public class SlideNotActivity extends Activity {
 		findViewById(R.id.btn2).setOnClickListener(btnListener); 
 		findViewById(R.id.btn3).setOnClickListener(btnListener); 
 		findViewById(R.id.btn4).setOnClickListener(btnListener); 
-		findViewById(R.id.btn5).setOnClickListener(btnListener); 
-		initAdam2();
+		findViewById(R.id.btn5).setOnClickListener(btnListener);
+		initAdam();
 	}
 	//버튼 리스너 구현 부분 
 	View.OnClickListener btnListener = new View.OnClickListener() {
@@ -116,40 +109,6 @@ public class SlideNotActivity extends Activity {
 	}
 
 	private void initAdam() {
-		AdInterstitial mAdInterstitial = null;
-		// 1. 전면형 광고 객체 생성
-		mAdInterstitial = new AdInterstitial(SlideNotActivity.this);
-		// 2. 전면형 광고 광고단위ID를 설정한다.
-		//mAdInterstitial.setClientId(ADVIEW_FULL);
-		// 3. (선택)전면형 광고 다운로드시에 실행할 리스너
-		mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {
-			@Override
-			public void OnAdLoaded() {
-				Log.i("InterstitialTab", "광고가 로딩되었습니다.");
-			}
-		});
-		// 4. (선택)전면형 광고 다운로드 실패시에 실행할 리스너
-		mAdInterstitial.setOnAdFailedListener(new OnAdFailedListener() {
-			@Override
-			public void OnAdFailed(AdError error, String errorMessage) {
-				// Toast.makeText(MainActivity.this,errorMessage,
-				// Toast.LENGTH_LONG).show();
-				// 광고 표시실패시 배너광고
-				Log.i("InterstitialTab", "전면형 광고 표시 실패/" + errorMessage);
-				initAdam2();
-			}
-		});
-		// 5. (선택)전면형 광고를 닫을 시에 실행할 리스너
-		mAdInterstitial.setOnAdClosedListener(new OnAdClosedListener() {
-			@Override
-			public void OnAdClosed() {
-				Log.i("InterstitialTab", "광고를 닫았습니다. ");
-			}
-		});
-		// 6. 전면형 광고를 불러온다.
-		mAdInterstitial.loadAd();
-	}
-	private void initAdam2() {
 		// Ad@m sdk 초기화 시작
 		adView.setRequestInterval(5);
 
@@ -192,12 +151,12 @@ public class SlideNotActivity extends Activity {
 		});
 
 		// 할당 받은 clientId 설정
-		adView.setClientId("DAN-1ib0yvnhuimur");
+		adView.setClientId("DAN-t4cbz4yyy0xl");
 
 		adView.setRequestInterval(12);
 
 		// Animation 효과 : 기본 값은 AnimationType.NONE
-		adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
+		adView.setAnimationType(AdView.AnimationType.FLIP_HORIZONTAL);
 
 		adView.setVisibility(View.VISIBLE);
 	}

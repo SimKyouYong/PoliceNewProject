@@ -40,12 +40,12 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom" >
 
-        <net.daum.adam.publisher.AdView
+        <com.kakao.adfit.publisher.AdView
             android:id="@+id/adview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            clientId="DAN-1ib0yvnhuimur"
+            clientId="DAN-t4cbz4yyy0xl"
             requestInterval="60"
             android:visibility="invisible" />
     </LinearLayout>

@@ -18,7 +18,8 @@ import android.webkit.ValueCallback;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import sky.projectpolice.adapter.SectionsPagerAdapter;
+import sjy.policenewproject.adapter.SectionsPagerAdapter;
+
 
 public class MainActivity extends FragmentActivity{
 	private FrameLayout flContainer;

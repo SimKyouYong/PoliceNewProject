@@ -22,15 +22,15 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import net.daum.adam.publisher.AdInterstitial;
-import net.daum.adam.publisher.AdView;
-import net.daum.adam.publisher.AdView.AnimationType;
-import net.daum.adam.publisher.AdView.OnAdClickedListener;
-import net.daum.adam.publisher.AdView.OnAdClosedListener;
-import net.daum.adam.publisher.AdView.OnAdFailedListener;
-import net.daum.adam.publisher.AdView.OnAdLoadedListener;
-import net.daum.adam.publisher.AdView.OnAdWillLoadListener;
-import net.daum.adam.publisher.impl.AdError;
+import com.kakao.adfit.publisher.AdInterstitial;
+import com.kakao.adfit.publisher.AdView;
+import com.kakao.adfit.publisher.AdView.AnimationType;
+import com.kakao.adfit.publisher.AdView.OnAdClickedListener;
+import com.kakao.adfit.publisher.AdView.OnAdClosedListener;
+import com.kakao.adfit.publisher.AdView.OnAdFailedListener;
+import com.kakao.adfit.publisher.AdView.OnAdLoadedListener;
+import com.kakao.adfit.publisher.AdView.OnAdWillLoadListener;
+import com.kakao.adfit.publisher.impl.AdError;
 
 import sjy.policenewproject.DetailActivity;
 import sjy.policenewproject.R;

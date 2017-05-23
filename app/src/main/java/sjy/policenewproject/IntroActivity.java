@@ -29,9 +29,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import co.kr.sky.AccumThread;
-import sky.projectpolice.common.Check_Preferences;
-import sky.projectpolice.common.CommonUtil;
-import sky.projectpolice.common.MySQLiteOpenHelper;
+import sjy.policenewproject.common.Check_Preferences;
+import sjy.policenewproject.common.CommonUtil;
+import sjy.policenewproject.common.MySQLiteOpenHelper;
 
 public class IntroActivity extends FragmentActivity {
 	DisplayMetrics displayMetrics = new DisplayMetrics();

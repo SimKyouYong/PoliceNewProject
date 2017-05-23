@@ -16,7 +16,7 @@ public class CommonUtil {
 		try {								 
 			_instance.SERVER = 	   		"http://snap40.cafe24.com/Police/";
 			_instance.SERVER_SNAP40 = 	   		"http://snap40.cafe24.com/Police/";
-			_instance.Local_Path = 	   		"/data/data/sky.skynewprojectpolice/databases";
+			_instance.Local_Path = 	   		"/data/data/sjy.policenewproject/databases";
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

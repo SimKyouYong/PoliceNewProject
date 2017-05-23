@@ -19,7 +19,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import sky.projectpolice.obj.Tableobj;
+import sjy.policenewproject.obj.Tableobj;
+
 
 public class LockScreenActivity extends Activity{
 

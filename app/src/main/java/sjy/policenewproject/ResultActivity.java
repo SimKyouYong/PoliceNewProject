@@ -19,8 +19,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import sky.projectpolice.common.Check_Preferences;
-import sky.projectpolice.obj.Tableobj;
+import sjy.policenewproject.common.Check_Preferences;
+import sjy.policenewproject.obj.Tableobj;
+
 
 public class ResultActivity extends Activity {
 	String Tag = "", Type = "", Level = "";

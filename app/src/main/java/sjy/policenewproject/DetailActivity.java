@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import sky.projectpolice.common.Check_Preferences;
+import sjy.policenewproject.common.Check_Preferences;
+
 
 public class DetailActivity extends Activity {
 	String Tag = "";
