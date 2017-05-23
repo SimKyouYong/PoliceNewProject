@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PoliceNewProject</string>
+
+    <string name="app_name">일독경찰공무원</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
 </resources>
