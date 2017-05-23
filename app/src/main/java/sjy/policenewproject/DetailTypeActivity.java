@@ -12,8 +12,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kakao.adfit.publisher.AdView;
+import com.kakao.adfit.publisher.AdView.OnAdClickedListener;
+import com.kakao.adfit.publisher.AdView.OnAdClosedListener;
+import com.kakao.adfit.publisher.AdView.OnAdFailedListener;
+import com.kakao.adfit.publisher.AdView.OnAdLoadedListener;
+import com.kakao.adfit.publisher.AdView.OnAdWillLoadListener;
+import com.kakao.adfit.publisher.impl.AdError;
 
 public class DetailTypeActivity extends Activity {
 	String Tag = "" , Type = "";
@@ -22,6 +31,8 @@ public class DetailTypeActivity extends Activity {
 	TextView title;
 	Button dele;
 	private int temp = 0;
+	private LinearLayout adWrapper = null;
+	private AdView adView = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,6 +43,8 @@ public class DetailTypeActivity extends Activity {
 
 		dele = (Button)findViewById(R.id.dele);
 		title = (TextView)findViewById(R.id.title_dt);
+		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
+		adView = (AdView) findViewById(R.id.adview);
 
 		title.setText("" + Tag);
 		if (Type.equals("휴지통")) {
@@ -180,5 +193,68 @@ public class DetailTypeActivity extends Activity {
 			// TODO: handle exception
 			Log.e("selectData()Error! : ",se.toString());
 		}
+	}
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		if (adView != null) {
+			adView.destroy();
+			adView = null;
+		}
+	}
+
+	private void initAdam() {
+		// Ad@m sdk 초기화 시작
+		adView.setRequestInterval(5);
+
+		// 광고 클릭시 실행할 리스너
+		adView.setOnAdClickedListener(new OnAdClickedListener() {
+			public void OnAdClicked() {
+				Log.i("SKY", "광고를 클릭했습니다.");
+			}
+		});
+
+		// 광고 내려받기 실패했을 경우에 실행할 리스너
+		adView.setOnAdFailedListener(new OnAdFailedListener() {
+			public void OnAdFailed(AdError arg0, String arg1) {
+				adWrapper.setVisibility(View.INVISIBLE);
+				Log.e("SKY", "setOnAdFailedListener :: " + arg0.toString());
+				Log.e("SKY", "setOnAdFailedListener :: " + arg1);
+			}
+		});
+
+		// 광고를 정상적으로 내려받았을 경우에 실행할 리스너
+		adView.setOnAdLoadedListener(new OnAdLoadedListener() {
+			public void OnAdLoaded() {
+				// 광고 제거
+				adWrapper.setVisibility(View.VISIBLE);
+				Log.e("SKY", "광고가 정상적으로 로딩되었습니다.");
+			}
+		});
+
+		// 광고를 불러올때 실행할 리스너
+		adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
+			public void OnAdWillLoad(String arg1) {
+				Log.e("SKY", "광고를 불러옵니다. : " + arg1);
+			}
+		});
+
+		// 광고를 닫았을때 실행할 리스너
+		adView.setOnAdClosedListener(new OnAdClosedListener() {
+			public void OnAdClosed() {
+				Log.e("SKY", "광고를 닫았습니다.");
+			}
+		});
+
+		// 할당 받은 clientId 설정
+		adView.setClientId("DAN-t4cbz4yyy0xl");
+
+		adView.setRequestInterval(12);
+
+		// Animation 효과 : 기본 값은 AnimationType.NONE
+		adView.setAnimationType(AdView.AnimationType.FLIP_HORIZONTAL);
+
+		adView.setVisibility(View.VISIBLE);
 	}
 }
