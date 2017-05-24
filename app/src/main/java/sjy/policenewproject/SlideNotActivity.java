@@ -30,7 +30,7 @@ public class SlideNotActivity extends Activity {
 
 		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
 		adView = (AdView) findViewById(R.id.adview);
-		screenlock = (Button) findViewById(R.id.btn5);
+		screenlock = (Button) findViewById(R.id.switch_on_off);
 
 		intent = new Intent(SlideNotActivity.this, ScreenService.class);
 		if (Check_Preferences.getAppPreferencesboolean(SlideNotActivity.this, "ScreenLock")) {
@@ -44,7 +44,6 @@ public class SlideNotActivity extends Activity {
 		findViewById(R.id.btn1).setOnClickListener(btnListener); 
 		findViewById(R.id.btn2).setOnClickListener(btnListener); 
 		findViewById(R.id.btn3).setOnClickListener(btnListener); 
-		findViewById(R.id.btn4).setOnClickListener(btnListener); 
 		findViewById(R.id.btn5).setOnClickListener(btnListener);
 		initAdam();
 	}
@@ -66,16 +65,16 @@ public class SlideNotActivity extends Activity {
 				it.putExtra("tag", "경찰학개론");
 				startActivity(it);
 				break;
-			case R.id.btn4:
-				Intent it3 = new Intent(Intent.ACTION_SEND);
-				it.setType("plain/text");
-				// 수신인 주소 - tos배열의 값을 늘릴 경우 다수의 수신자에게 발송됨
-				String[] tos = { "pongjjun@gmail.com" };
-				it3.putExtra(Intent.EXTRA_EMAIL, tos);
-				it3.putExtra(Intent.EXTRA_SUBJECT, "[문제추가 요청]" + "문제 추가 요청 드립니다.");
-				it3.putExtra(Intent.EXTRA_TEXT, "파일을 첨부해주세요.(Execel 형식으로 정리해서 주시면 감사합니다.");
-				startActivity(it3);
-				break;
+//			case R.id.btn4:
+//				Intent it3 = new Intent(Intent.ACTION_SEND);
+//				it.setType("plain/text");
+//				// 수신인 주소 - tos배열의 값을 늘릴 경우 다수의 수신자에게 발송됨
+//				String[] tos = { "pongjjun@gmail.com" };
+//				it3.putExtra(Intent.EXTRA_EMAIL, tos);
+//				it3.putExtra(Intent.EXTRA_SUBJECT, "[문제추가 요청]" + "문제 추가 요청 드립니다.");
+//				it3.putExtra(Intent.EXTRA_TEXT, "파일을 첨부해주세요.(Execel 형식으로 정리해서 주시면 감사합니다.");
+//				startActivity(it3);
+//				break;
 			case R.id.btn5:
 				Log.e("SKY", "--btn5--");
 				//스크린락 
@@ -152,7 +151,7 @@ public class SlideNotActivity extends Activity {
 		});
 
 		// 할당 받은 clientId 설정
-		adView.setClientId("DAN-t4cbz4yyy0xl");
+		adView.setClientId("DAN-1h7z9841th8ac");
 
 		adView.setRequestInterval(12);
 
