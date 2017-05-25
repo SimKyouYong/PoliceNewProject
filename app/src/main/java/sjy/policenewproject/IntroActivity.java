@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -67,12 +68,6 @@ public class IntroActivity extends FragmentActivity {
 					PERMISSIONS_STORAGE,
 					1);
 		}
-
-
-
-
-		
-		
 	}
 	private void MainMove(){
 		Handler handler = new Handler(Looper.getMainLooper());
@@ -200,41 +195,47 @@ public class IntroActivity extends FragmentActivity {
 		switch (requestCode) {
 			case 1: {
 				vc = new MySQLiteOpenHelper(this);
-				map.put("url", dataSet.SERVER + "Version.php");
-				// 스레드 생성
-				mThread = new AccumThread(this, mAfterAccum, map, 0, 0, null);
-				mThread.start(); // 스레드 시작!!
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Log.e("SKY" , "성공");
-//                    Log.e("SKY" , "permissions SIZE :: " + permissions.length);
-//                    if (permissions.length == 6) {
-//                        mHandler.postDelayed(r, 2000);
-//                    }else{
-//                        AlertDialog.Builder alert = new AlertDialog.Builder(IntroActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-//                        alert.setTitle("알림");
-//                        alert.setMessage("");
-//                        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int whichButton) {
-//                                mHandler.postDelayed(r, 2000);
-//                            }
-//                        });
-//					/*
-//					// Cancel 버튼 이벤트
-//					alert.setNegativeButton("취소",new DialogInterface.OnClickListener() {
-//						public void onClick(DialogInterface dialog, int which) {
-//							dialog.cancel();
-//							finish();
-//						}
-//					});
-//					*/
-//                        alert.show();
-//                    }
-//
-//                } else {
-//                    Log.e("SKY" , "실패");
-//                }
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e("SKY" , "성공");
+                    Log.e("SKY" , "permissions SIZE :: " + permissions.length);
+                    if (permissions.length == 3) {
+						map.put("url", dataSet.SERVER + "Version.php");
+						// 스레드 생성
+						mThread = new AccumThread(this, mAfterAccum, map, 0, 0, null);
+						mThread.start(); // 스레드 시작!!
+                    }else{
+                        AlertDialog.Builder alert = new AlertDialog.Builder(IntroActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+                        alert.setTitle("알림");
+                        alert.setMessage("모두 허용하지 않을경우에는 정상적인 서비스를 받을수 없습니다.");
+                        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+								map.put("url", dataSet.SERVER + "Version.php");
+								// 스레드 생성
+								mThread = new AccumThread(IntroActivity.this, mAfterAccum, map, 0, 0, null);
+								mThread.start(); // 스레드 시작!!
+                            }
+                        });
+                        alert.show();
+                    }
+
+                } else {
+                    Log.e("SKY" , "실패");
+					AlertDialog.Builder alert = new AlertDialog.Builder(IntroActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+					alert.setTitle("알림");
+					alert.setMessage("모두 허용하지 않을경우에는 정상적인 서비스를 받을수 없습니다.");
+					alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+							map.put("url", dataSet.SERVER + "Version.php");
+							// 스레드 생성
+							mThread = new AccumThread(IntroActivity.this, mAfterAccum, map, 0, 0, null);
+							mThread.start(); // 스레드 시작!!
+						}
+					});
+					alert.show();
+                }
 				return;
 			}
 		}
