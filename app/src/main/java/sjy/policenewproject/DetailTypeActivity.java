@@ -16,35 +16,30 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kakao.adfit.publisher.AdView;
-import com.kakao.adfit.publisher.AdView.OnAdClickedListener;
-import com.kakao.adfit.publisher.AdView.OnAdClosedListener;
-import com.kakao.adfit.publisher.AdView.OnAdFailedListener;
-import com.kakao.adfit.publisher.AdView.OnAdLoadedListener;
-import com.kakao.adfit.publisher.AdView.OnAdWillLoadListener;
-import com.kakao.adfit.publisher.impl.AdError;
+import com.fsn.cauly.CaulyAdView;
+import com.fsn.cauly.CaulyAdViewListener;
 
-public class DetailTypeActivity extends Activity {
+public class DetailTypeActivity extends Activity implements CaulyAdViewListener {
 	String Tag = "" , Type = "";
 	private static final String LOGTAG = "SKY";
+	private CaulyAdView xmlAdView;
 
 	TextView title;
 	Button dele;
 	private int temp = 0;
 	private LinearLayout adWrapper = null;
-	private AdView adView = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detailtype);
 
+		initCauly();
 		Tag = getIntent().getStringExtra("tag");
 		Type = getIntent().getStringExtra("type");
 
 		dele = (Button)findViewById(R.id.dele);
 		title = (TextView)findViewById(R.id.title_dt);
 		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
-		adView = (AdView) findViewById(R.id.adview);
 
 		title.setText("" + Tag);
 		if (Type.equals("휴지통")) {
@@ -59,7 +54,43 @@ public class DetailTypeActivity extends Activity {
 		findViewById(R.id.dele).setOnClickListener(btnListener);
 
 	}
+	private void initCauly(){
+		// 선택사항: XML의 AdView 항목을 찾아 Listener 설정
+		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
+		xmlAdView.setAdViewListener(this);
 
+		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
+	}
+	@Override
+	public void onReceiveAd(CaulyAdView adView, boolean isChargeableAd) {
+		// 광고 수신 성공 & 노출된 경우 호출됨.
+		// 수신된 광고가 무료 광고인 경우 isChargeableAd 값이 false 임.
+		if (isChargeableAd == false) {
+			Log.e("SKY", "free banner AD received.");
+		}
+		else {
+			Log.e("SKY", "normal banner AD received.");
+		}
+	}
+
+	@Override
+	public void onFailedToReceiveAd(CaulyAdView adView, int errorCode, String errorMsg) {
+		// 배너 광고 수신 실패할 경우 호출됨.
+		Log.e("SKY", "failed to receive banner AD.");
+		adWrapper.setVisibility(View.GONE);
+	}
+
+	@Override
+	public void onShowLandingScreen(CaulyAdView adView) {
+		// 광고 배너를 클릭하여 랜딩 페이지가 열린 경우 호출됨.
+		Log.e("SKY", "banner AD landing screen opened.");
+	}
+
+	@Override
+	public void onCloseLandingScreen(CaulyAdView adView) {
+		// 광고 배너를 클릭하여 열린 랜딩 페이지가 닫힌 경우 호출됨.
+		Log.e("SKY", "banner AD landing screen closed.");
+	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -194,67 +225,5 @@ public class DetailTypeActivity extends Activity {
 			Log.e("selectData()Error! : ",se.toString());
 		}
 	}
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
 
-		if (adView != null) {
-			adView.destroy();
-			adView = null;
-		}
-	}
-
-	private void initAdam() {
-		// Ad@m sdk 초기화 시작
-		adView.setRequestInterval(5);
-
-		// 광고 클릭시 실행할 리스너
-		adView.setOnAdClickedListener(new OnAdClickedListener() {
-			public void OnAdClicked() {
-				Log.i("SKY", "광고를 클릭했습니다.");
-			}
-		});
-
-		// 광고 내려받기 실패했을 경우에 실행할 리스너
-		adView.setOnAdFailedListener(new OnAdFailedListener() {
-			public void OnAdFailed(AdError arg0, String arg1) {
-				adWrapper.setVisibility(View.INVISIBLE);
-				Log.e("SKY", "setOnAdFailedListener :: " + arg0.toString());
-				Log.e("SKY", "setOnAdFailedListener :: " + arg1);
-			}
-		});
-
-		// 광고를 정상적으로 내려받았을 경우에 실행할 리스너
-		adView.setOnAdLoadedListener(new OnAdLoadedListener() {
-			public void OnAdLoaded() {
-				// 광고 제거
-				adWrapper.setVisibility(View.VISIBLE);
-				Log.e("SKY", "광고가 정상적으로 로딩되었습니다.");
-			}
-		});
-
-		// 광고를 불러올때 실행할 리스너
-		adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
-			public void OnAdWillLoad(String arg1) {
-				Log.e("SKY", "광고를 불러옵니다. : " + arg1);
-			}
-		});
-
-		// 광고를 닫았을때 실행할 리스너
-		adView.setOnAdClosedListener(new OnAdClosedListener() {
-			public void OnAdClosed() {
-				Log.e("SKY", "광고를 닫았습니다.");
-			}
-		});
-
-		// 할당 받은 clientId 설정
-		adView.setClientId("DAN-t4cbz4yyy0xl");
-
-		adView.setRequestInterval(12);
-
-		// Animation 효과 : 기본 값은 AnimationType.NONE
-		adView.setAnimationType(AdView.AnimationType.FLIP_HORIZONTAL);
-
-		adView.setVisibility(View.VISIBLE);
-	}
 }

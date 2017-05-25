@@ -52,6 +52,10 @@
             android:name=".LockScreenActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
 
+        <activity
+            android:name="com.fsn.cauly.blackdragoncore.LandingActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard">
+        </activity>
         <service android:name=".ScreenService" />
 
         <receiver android:name=".ScreenReceiver" />
@@ -69,7 +73,6 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 

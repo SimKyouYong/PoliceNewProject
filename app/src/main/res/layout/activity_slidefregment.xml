@@ -13,14 +13,24 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom" >
 
-        <net.daum.adam.publisher.AdView
+        <com.fsn.cauly.CaulyAdView
+            xmlns:app="http://schemas.android.com/apk/res/sjy.policenewproject"
+            android:id="@+id/xmladview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:appcode="U6yUgNCr"
+            app:effect="TopSlide"
+            app:enableDefaultBannerAd="false"
+            />
+
+        <!--
+        <com.kakao.adfit.publisher.AdView
             android:id="@+id/adview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            clientId="DAN-1ib0yvnhuimur"
-            requestInterval="60"
             android:visibility="invisible" />
+            -->
     </LinearLayout>
 
     <ImageView
