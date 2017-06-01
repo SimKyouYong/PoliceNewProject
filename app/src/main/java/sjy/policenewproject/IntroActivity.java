@@ -54,6 +54,8 @@ public class IntroActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intro);
+		vc = new MySQLiteOpenHelper(this);
+
 		int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
 		if(permissionCheck== PackageManager.PERMISSION_DENIED){
 			// 권한 없음

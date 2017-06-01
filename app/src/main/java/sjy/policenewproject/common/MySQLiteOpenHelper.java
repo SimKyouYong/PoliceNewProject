@@ -18,7 +18,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
 	static String NAME = "testdb.sqlite";		//sqlite �̸� ���� 
 	static CursorFactory FACTORY = null;		//Ŀ�� �ʱ�ȭ 
-	static String PACKEGE = "sky.skynewprojectpolice";	//��Ű�� �̸� ����
+	static String PACKEGE = "sjy.policenewproject";	//��Ű�� �̸� ����
 	static String DB = "mydb.db";			//Į�θ� ��� �̸� ���� 
 	static int VERSION  = 1;					//��� ���� 
 	public MySQLiteOpenHelper(Context context) {

@@ -20,7 +20,7 @@
             android:layout_margin="5dp"
             android:padding="5dp"
             android:text="title"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -166,7 +166,7 @@
                     android:layout_marginRight="5dp"
                     android:background="@mipmap/police_btn10_2"
                     android:gravity="center"
-                    android:textSize="24dp" />
+                    />
             </LinearLayout>
 
             <LinearLayout
