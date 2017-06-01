@@ -83,6 +83,11 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
             android:textSize="19dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#696969"
+            />
 
         <Button
             android:id="@+id/btn2"
@@ -93,7 +98,11 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
             android:textSize="19dp" />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#696969"
+            />
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
@@ -103,7 +112,11 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
             android:textSize="19dp" />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#696969"
+            />
         <Button
             android:id="@+id/btn4"
             android:layout_width="wrap_content"
@@ -113,7 +126,11 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
             android:textSize="19dp" />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#696969"
+            />
         <Button
             android:id="@+id/btn5"
             android:layout_width="match_parent"

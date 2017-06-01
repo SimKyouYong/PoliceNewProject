@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">일독폴리스드림</string>
+    <string name="app_name">락스크린경찰</string>
     <string name="hello_world">Hello world!</string>
 	<string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>
