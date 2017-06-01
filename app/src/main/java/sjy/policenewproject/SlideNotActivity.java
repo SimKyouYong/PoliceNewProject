@@ -20,6 +20,7 @@ import com.fsn.cauly.CaulyCloseAdListener;
 
 import sjy.policenewproject.common.Check_Preferences;
 
+import static sjy.policenewproject.R.id.switch_on_off;
 
 
 public class SlideNotActivity extends Activity implements CaulyAdViewListener , CaulyCloseAdListener {
@@ -43,7 +44,7 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 
 
 		initCauly();
-		screenlock = (Button) findViewById(R.id.switch_on_off);
+		screenlock = (Button) findViewById(switch_on_off);
 
 		intent = new Intent(SlideNotActivity.this, ScreenService.class);
 		if (Check_Preferences.getAppPreferencesboolean(SlideNotActivity.this, "ScreenLock")) {
@@ -55,9 +56,10 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 			screenlock.setBackgroundResource(R.mipmap.policedream_mainbtn_06_0ff);
 		}
 		findViewById(R.id.btn1).setOnClickListener(btnListener); 
-		findViewById(R.id.btn2).setOnClickListener(btnListener); 
-		findViewById(R.id.btn3).setOnClickListener(btnListener); 
+		findViewById(R.id.btn2).setOnClickListener(btnListener);
+		findViewById(R.id.btn3).setOnClickListener(btnListener);
 		findViewById(R.id.btn5).setOnClickListener(btnListener);
+		findViewById(switch_on_off).setOnClickListener(btnListener);
 	}
 
 	private void initCauly(){
@@ -126,6 +128,22 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 			case R.id.btn3:
 				it.putExtra("tag", "경찰학개론");
 				startActivity(it);
+				break;
+			case R.id.switch_on_off:
+				//스크린락
+				if (!Check_Preferences.getAppPreferencesboolean(SlideNotActivity.this, "ScreenLock")) {
+					//on
+					screenlock.setBackgroundResource(R.mipmap.policedream_mainbtn_06_0n);
+					intent = new Intent(SlideNotActivity.this, ScreenService.class);
+					startService(intent);
+					Check_Preferences.setAppPreferences(SlideNotActivity.this, "ScreenLock", true);
+				}else{
+					//off
+					screenlock.setBackgroundResource(R.mipmap.policedream_mainbtn_06_0ff);
+					intent = new Intent(SlideNotActivity.this, ScreenService.class);
+					stopService(intent);
+					Check_Preferences.setAppPreferences(SlideNotActivity.this, "ScreenLock", false);
+				}
 				break;
 			case R.id.btn5:
 				Log.e("SKY", "--btn5--");

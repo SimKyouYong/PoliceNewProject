@@ -1,16 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D3D3D3"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/topview"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:layout_alignParentTop="true"
-        android:background="#3e73ae" >
+        android:background="#3e73ae">
 
         <Button
             android:id="@+id/back"
@@ -19,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="&lt;" />
+            android:background="@mipmap/p_btn_main_back" />
 
         <TextView
             android:id="@+id/title_dt"
@@ -46,18 +45,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:layout_gravity="bottom" >
-        <com.fsn.cauly.CaulyAdView
-            xmlns:app="http://schemas.android.com/apk/res/sjy.policenewproject"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <com.fsn.cauly.CaulyAdView xmlns:app="http://schemas.android.com/apk/res/sjy.policenewproject"
             android:id="@+id/xmladview"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:appcode="U6yUgNCr"
             app:effect="TopSlide"
-            app:enableDefaultBannerAd="false"
-            />
+            app:enableDefaultBannerAd="false" />
 
         <!--
         <com.kakao.adfit.publisher.AdView
@@ -73,52 +71,49 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/vv"
         android:layout_below="@+id/topview"
-        android:orientation="vertical" >
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="#00000000"
+            android:background="@mipmap/btn_01"
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
-            android:text="익히기"
             android:textSize="19dp" />
 
         <Button
             android:id="@+id/btn2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="#00000000"
+            android:background="@mipmap/btn_03"
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
-            android:text="OX 문제"
             android:textSize="19dp" />
 
         <Button
             android:id="@+id/btn3"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="#00000000"
+            android:background="@mipmap/btn_02"
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
-            android:text="오답노트"
             android:textSize="19dp" />
 
         <Button
             android:id="@+id/btn4"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="#00000000"
+            android:background="@mipmap/btn_04"
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
-            android:text="휴지통"
             android:textSize="19dp" />
-        
+
         <Button
             android:id="@+id/btn5"
             android:layout_width="match_parent"
@@ -128,7 +123,8 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
             android:text="정답 오답노트 초기화"
-            android:textSize="19dp" />
+            android:textSize="19dp"
+            android:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>
