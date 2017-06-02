@@ -50,22 +50,13 @@
             app:effect="TopSlide"
             app:enableDefaultBannerAd="false"
             />
-
-        <!--
-        <com.kakao.adfit.publisher.AdView
-            android:id="@+id/adview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible" />
-            -->
-
     </LinearLayout>
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/adWrapper"
-        android:layout_below="@+id/topview" >
+        android:layout_below="@+id/topview"
+        android:layout_above="@+id/adWrapper">
 
         <LinearLayout
             android:layout_width="fill_parent"

@@ -265,8 +265,8 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 			// 처음 레코드로 이동
 			while (cur.moveToNext()) {
 				// 읽은값 출력
-				Log.i("SKY", cur.getString(0) + "/" + cur.getString(1) + "/"
-						+ cur.getString(7));
+//				Log.i("SKY", cur.getString(0) + "/" + cur.getString(1) + "/"
+//						+ cur.getString(7));
 				arr.add(new Tableobj(cur.getString(0), cur.getString(1), cur
 						.getString(2), "<span style=\"color:red\">"
 						+ cur.getString(3) + "</span>", cur.getString(4), cur
@@ -295,8 +295,8 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 			// 처음 레코드로 이동
 			while (cur.moveToNext()) {
 				// 읽은값 출력
-				Log.i("SKY", cur.getString(0) + "/" + cur.getString(1) + "/"
-						+ cur.getString(7));
+//				Log.i("SKY", cur.getString(0) + "/" + cur.getString(1) + "/"
+//						+ cur.getString(7));
 				arr.add(new Tableobj(cur.getString(0), cur.getString(1), cur
 						.getString(2), cur.getString(3), cur.getString(4), cur
 						.getString(5), cur.getString(6), cur.getString(7)));
@@ -325,10 +325,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 			// 처음 레코드로 이동
 			while (cur.moveToNext()) {
 				// 읽은값 출력
-				Log.d("SKY",
-						cur.getString(0) + "/" + cur.getString(1) + "/"
-								+ cur.getString(7) + "/"
-								+ cur.getString(3).substring(0, 5));
+				//Log.d("SKY",cur.getString(0) + "/" + cur.getString(1) + "/"	+ cur.getString(7) + "/"+ cur.getString(3).substring(0, 5));
 				if (cur.getString(7) == null) {// 맞춘 카운트 없음
 					arr.add(new Tableobj(cur.getString(0), cur.getString(1),
 							cur.getString(2), cur.getString(3), cur
@@ -640,7 +637,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 						if (rr == null) {
 							rr = "";
 						}
-						exam_r.setText("정답입니다.\n" + rr + "\n");
+						exam_r.setText("[정답] \n" + rr + "\n");
 						if (!Type.equals("휴지통"))
 							update_O(arr.get(position).getKeyindex(),
 									arr.get(position).getFlag());
@@ -656,7 +653,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 						if (rr == null) {
 							rr = "";
 						}
-						exam_r.setText("틀렸습니다. 정답은 O " + " 입니다.");
+						exam_r.setText("[오답]정답은 O " + " 입니다.");
 						btn_x.setVisibility(View.INVISIBLE);
 						if (!Type.equals("휴지통"))
 							update_X();
@@ -670,7 +667,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 					btn_next.setVisibility(View.VISIBLE);
 					if (arr.get(position).getSolution().equals("O")) {
 						// 정답입니다.
-						exam_r.setText("정답입니다.");
+						exam_r.setText("[정답]");
 						if (!Type.equals("휴지통"))
 							update_O(arr.get(position).getKeyindex(),
 									arr.get(position).getFlag());
@@ -686,7 +683,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 						if (rr == null) {
 							rr = "";
 						}
-						exam_r.setText("틀렸습니다. 정답은 X 입니다.\n" + rr);
+						exam_r.setText("[오답] 정답은 X 입니다.\n" + rr);
 						btn_o.setVisibility(View.INVISIBLE);
 						if (!Type.equals("휴지통"))
 							update_X();
@@ -739,7 +736,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 			case R.id.btn_garbege:
 				AlertDialog.Builder alt_bld = new AlertDialog.Builder(
 						ResultActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-				alt_bld.setMessage("정말 버리시겠습니까?")
+				alt_bld.setMessage("휴지통에 이동하시겠습니까?")
 						.setCancelable(false)
 						.setPositiveButton("예",
 								new DialogInterface.OnClickListener() {
@@ -757,7 +754,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 												.getKeyindex(), "5");
 
 										Toast.makeText(getApplicationContext(),
-												"휴지통에 버렸습니다.",
+												"휴지통에 이동하였습니다.",
 												Toast.LENGTH_SHORT).show();
 										;
 
@@ -801,7 +798,7 @@ public class ResultActivity extends Activity implements CaulyAdViewListener {
 
 				AlertDialog.Builder alt_bld2 = new AlertDialog.Builder(
 						ResultActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-				alt_bld2.setMessage("다음에 이어할 수 있도록 현재 위치를 저장합니까?")
+				alt_bld2.setMessage("현재 위치를 저장합니까?")
 						.setCancelable(false)
 						.setPositiveButton("예",
 								new DialogInterface.OnClickListener() {
