@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import sjy.policenewproject.adapter.SectionsPagerAdapter;
+import sjy.policenewproject.boot.ScreenReceiver;
 
 
 public class MainActivity extends FragmentActivity{

@@ -56,13 +56,48 @@
             android:name="com.fsn.cauly.blackdragoncore.LandingActivity"
             android:configChanges="keyboardHidden|orientation|keyboard">
         </activity>
-        <service android:name=".ScreenService" />
+        <receiver android:name="sjy.policenewproject.boot.ScreenReceiver" >
+            <intent-filter
+                android:enabled="true"
+                android:exported="false" >
+                <action android:name="android.intent.action.SCREEN_ON" />
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
 
-        <receiver android:name=".ScreenReceiver" />
+        <service
+            android:name="sjy.policenewproject.boot.ScreenService"
+            android:enabled="true" >
+        </service>
+
+        <receiver
+            android:name="sjy.policenewproject.boot.RestartService"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="RestartService.ACTION_RESTART_SCREENSERVICE" >
+                </action>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="sjy.policenewproject.boot.BootService" >
+            <intent-filter>
+                <action android:name="service.BootService" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <receiver android:name="sjy.policenewproject.boot.BootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
+        </receiver>
     </application>
 
-    <!-- Cauly : 광고 노출을 위한 필수 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />

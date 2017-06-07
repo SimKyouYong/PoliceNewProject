@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,15 +34,17 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 	LinearLayout view;
 	int random_index;
 	private Typeface ttf;
-
+	@Override
+	public void onResume() {
+		Log.e("SKY" , "-- onResume --");
+		initCauly();
+		super.onResume();
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lockscreen);
-		//ttf = Typeface.createFromAsset(getAssets(), "HANYGO230.TTF");
-		initCauly();
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED 
-				| WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+
 
 		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
 		view = (LinearLayout) findViewById(R.id.view);
@@ -58,7 +59,9 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 		btn_garbege = (Button) findViewById(R.id.btn_garbege);
 		btn_checkmarkon = (Button) findViewById(R.id.btn_checkmarkon);
 		btn_checkmarkload = (Button) findViewById(R.id.btn_checkmarkload);
-		
+		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
+		xmlAdView.setAdViewListener(this);
+
 		title.setTypeface(ttf);
 		title_sub.setTypeface(ttf);
 		exam.setTypeface(ttf);
@@ -68,13 +71,14 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 		findViewById(R.id.btn_o).setOnClickListener(btnListener);
 
 		setSetting();
+
 	}
 	private void initCauly(){
+		Log.e("SKY" , "-- initCauly --");
 		// 선택사항: XML의 AdView 항목을 찾아 Listener 설정
 		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
 		xmlAdView.setAdViewListener(this);
 
-		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
 	}
 
 	@Override
@@ -183,6 +187,7 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 	private void setSetting() {
 		int random = (int) (Math.random() * 3);
 		SELECT_DB(random);
+		initCauly();
 	}
 	private void SELECT_DB(int random) // 디비 값 조회해서 저장하기
 	{

@@ -41,7 +41,9 @@ public class IntroActivity extends FragmentActivity {
 	private static String[] PERMISSIONS_STORAGE = {
 			Manifest.permission.READ_CONTACTS,
 			Manifest.permission.READ_PHONE_STATE,
-			Manifest.permission.WRITE_EXTERNAL_STORAGE
+			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+
+
 	};
 
 

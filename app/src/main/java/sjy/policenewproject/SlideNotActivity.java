@@ -18,6 +18,8 @@ import com.fsn.cauly.CaulyAdViewListener;
 import com.fsn.cauly.CaulyCloseAd;
 import com.fsn.cauly.CaulyCloseAdListener;
 
+import sjy.policenewproject.boot.ScreenReceiver;
+import sjy.policenewproject.boot.ScreenService;
 import sjy.policenewproject.common.Check_Preferences;
 
 import static sjy.policenewproject.R.id.switch_on_off;
@@ -55,7 +57,7 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 			//off
 			screenlock.setBackgroundResource(R.mipmap.policedream_mainbtn_06_0ff);
 		}
-		findViewById(R.id.btn1).setOnClickListener(btnListener); 
+		findViewById(R.id.btn1).setOnClickListener(btnListener);
 		findViewById(R.id.btn2).setOnClickListener(btnListener);
 		findViewById(R.id.btn3).setOnClickListener(btnListener);
 		findViewById(R.id.btn5).setOnClickListener(btnListener);

@@ -24,8 +24,8 @@ import android.widget.RelativeLayout;
 
 import sjy.policenewproject.DetailActivity;
 import sjy.policenewproject.R;
-import sjy.policenewproject.ScreenReceiver;
-import sjy.policenewproject.ScreenService;
+import sjy.policenewproject.boot.ScreenReceiver;
+import sjy.policenewproject.boot.ScreenService;
 import sjy.policenewproject.common.Check_Preferences;
 import sjy.policenewproject.common.FragmentEx;
 
