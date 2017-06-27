@@ -17,6 +17,8 @@ import com.fsn.cauly.CaulyAdView;
 import com.fsn.cauly.CaulyAdViewListener;
 import com.fsn.cauly.CaulyCloseAd;
 import com.fsn.cauly.CaulyCloseAdListener;
+import com.gomfactory.adpie.sdk.AdPieError;
+import com.gomfactory.adpie.sdk.AdView;
 
 import sjy.policenewproject.boot.ScreenReceiver;
 import sjy.policenewproject.boot.ScreenService;
@@ -33,6 +35,9 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 	private ScreenReceiver restartService;
 	private Intent intent = null;
 	CaulyCloseAd mCloseAd;
+	private AdView adPieView;
+
+
 	@Override
 	protected void onResume() {
 		if (mCloseAd != null)
@@ -43,9 +48,16 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_slidenot);
+		// Insert your AdPie-Media-ID
+		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
+		adPieView = (AdView) findViewById(R.id.ad_view);
 
+		if (Check_Preferences.getAppPreferences(this , "adview").equals("cauly")){
+			initCauly();
+		}else{
+			initAdpie();
+		}
 
-		initCauly();
 		screenlock = (Button) findViewById(switch_on_off);
 
 		intent = new Intent(SlideNotActivity.this, ScreenService.class);
@@ -62,9 +74,40 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 		findViewById(R.id.btn3).setOnClickListener(btnListener);
 		findViewById(R.id.btn5).setOnClickListener(btnListener);
 		findViewById(switch_on_off).setOnClickListener(btnListener);
-	}
 
+
+
+
+
+	}
+	private void initAdpie() {
+		xmlAdView.setVisibility(View.GONE);
+		// Insert your AdPie-Slot-ID
+		adPieView.setSlotId(getString(R.string.banner_sid));
+		adPieView.setAdListener(new AdView.AdListener() {
+
+			@Override
+			public void onAdLoaded() {
+				Log.e("SKY", "AdView onAdLoaded");
+			}
+
+			@Override
+			public void onAdFailedToLoad(int errorCode) {
+				Log.e("SKY", "AdView onAdFailedToLoad "	+ AdPieError.getMessage(errorCode));
+
+			}
+
+			@Override
+			public void onAdClicked() {
+				Log.e("SKY", "AdView onAdClicked");
+
+			}
+		});
+		adPieView.load();
+	}
 	private void initCauly(){
+		adPieView.setVisibility(View.GONE);
+
 		// CloseAd 초기화
 		CaulyAdInfo closeAdInfo = new CaulyAdInfoBuilder("U6yUgNCr").build();
 		mCloseAd = new CaulyCloseAd();
@@ -75,10 +118,11 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 		mCloseAd.setAdInfo(closeAdInfo);
 		mCloseAd.setCloseAdListener(this);
 		// 선택사항: XML의 AdView 항목을 찾아 Listener 설정
-		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
 		xmlAdView.setAdViewListener(this);
 
 		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
+
+
 	}
 
 	@Override
@@ -87,6 +131,8 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 		// 수신된 광고가 무료 광고인 경우 isChargeableAd 값이 false 임.
 		if (isChargeableAd == false) {
 			Log.e("SKY", "free banner AD received.");
+			xmlAdView.setVisibility(View.GONE);
+			adPieView.load();
 		}
 		else {
 			Log.e("SKY", "normal banner AD received.");
@@ -159,10 +205,14 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 			Check_Preferences.setAppPreferences(SlideNotActivity.this, "ScreenLock", true);
 		}
 	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
+		if (adPieView != null) {
+			adPieView.destroy();
+			adPieView = null;
+		}
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

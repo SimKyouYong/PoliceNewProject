@@ -18,6 +18,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.gomfactory.adpie.sdk.AdPieSDK;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,6 +59,8 @@ public class IntroActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intro);
 		vc = new MySQLiteOpenHelper(this);
+		AdPieSDK.getInstance().initialize(getApplicationContext(), getString(R.string.mid));
+
 
 		int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
 		if(permissionCheck== PackageManager.PERMISSION_DENIED){
@@ -102,12 +106,22 @@ public class IntroActivity extends FragmentActivity {
 						// 다운로드
 						new DownloadFileFullAsync(IntroActivity.this).execute(dataSet.SERVER + "police_db.db");
 					} else {
-						MainMove();
+						map.clear();
+						map.put("url", dataSet.SERVER + "Adview.php");
+						// 스레드 생성
+						mThread = new AccumThread(IntroActivity.this, mAfterAccum, map, 0, 1000, null);
+						mThread.start(); // 스레드 시작!!
+
 					}
 				} else {
 					// 최초버전.. 무조건 다운로드
 					new DownloadFileFullAsync(IntroActivity.this).execute(dataSet.SERVER + "police_db.db");
 				}
+			}else{
+				String res = (String) msg.obj;
+				Log.e("CHECK", "RESULT  -> " + res);
+				Check_Preferences.setAppPreferences(IntroActivity.this ,"adview" ,res.trim().replace(" " ,""));
+				MainMove();
 			}
 		}
 	};
@@ -192,7 +206,11 @@ public class IntroActivity extends FragmentActivity {
 		protected void onPostExecute(String unused) {
 			mDlg.dismiss();
 			Check_Preferences.setAppPreferences(IntroActivity.this, "version","" + Server_Ver);
-			MainMove();
+			map.clear();
+			map.put("url", dataSet.SERVER + "Adview.php");
+			// 스레드 생성
+			mThread = new AccumThread(IntroActivity.this, mAfterAccum, map, 0, 1000, null);
+			mThread.start(); // 스레드 시작!!
 		}
 	}
 	public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {

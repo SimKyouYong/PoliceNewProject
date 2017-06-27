@@ -18,11 +18,16 @@ import android.widget.Toast;
 
 import com.fsn.cauly.CaulyAdView;
 import com.fsn.cauly.CaulyAdViewListener;
+import com.gomfactory.adpie.sdk.AdPieError;
+import com.gomfactory.adpie.sdk.AdView;
+
+import sjy.policenewproject.common.Check_Preferences;
 
 public class DetailTypeActivity extends Activity implements CaulyAdViewListener {
 	String Tag = "" , Type = "";
 	private static final String LOGTAG = "SKY";
 	private CaulyAdView xmlAdView;
+	private AdView adPieView;
 
 	TextView title;
 	Button dele;
@@ -32,8 +37,13 @@ public class DetailTypeActivity extends Activity implements CaulyAdViewListener 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detailtype);
-
-		initCauly();
+		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
+		adPieView = (AdView) findViewById(R.id.ad_view);
+		if (Check_Preferences.getAppPreferences(this , "adview").equals("cauly")){
+			initCauly();
+		}else{
+			initAdpie();
+		}
 		Tag = getIntent().getStringExtra("tag");
 		Type = getIntent().getStringExtra("type");
 
@@ -53,6 +63,31 @@ public class DetailTypeActivity extends Activity implements CaulyAdViewListener 
 		findViewById(R.id.btn4).setOnClickListener(btnListener);
 		findViewById(R.id.dele).setOnClickListener(btnListener);
 
+	}
+	private void initAdpie() {
+		xmlAdView.setVisibility(View.GONE);
+		// Insert your AdPie-Slot-ID
+		adPieView.setSlotId(getString(R.string.banner_sid));
+		adPieView.setAdListener(new AdView.AdListener() {
+
+			@Override
+			public void onAdLoaded() {
+				Log.e("SKY", "AdView onAdLoaded");
+			}
+
+			@Override
+			public void onAdFailedToLoad(int errorCode) {
+				Log.e("SKY", "AdView onAdFailedToLoad "	+ AdPieError.getMessage(errorCode));
+
+			}
+
+			@Override
+			public void onAdClicked() {
+				Log.e("SKY", "AdView onAdClicked");
+
+			}
+		});
+		adPieView.load();
 	}
 	private void initCauly(){
 		// 선택사항: XML의 AdView 항목을 찾아 Listener 설정

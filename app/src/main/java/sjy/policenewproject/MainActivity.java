@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity{
 	private Typeface ttf;
 	ProgressDialog dialog;
 	private ScreenReceiver restartService;
-	
+
 	@Override
 	protected void onResume(){
 		super.onResume();

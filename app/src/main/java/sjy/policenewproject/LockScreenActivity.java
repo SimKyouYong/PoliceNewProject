@@ -18,9 +18,13 @@ import android.widget.TextView;
 
 import com.fsn.cauly.CaulyAdView;
 import com.fsn.cauly.CaulyAdViewListener;
+import com.gomfactory.adpie.sdk.AdPieError;
+import com.gomfactory.adpie.sdk.AdPieSDK;
+import com.gomfactory.adpie.sdk.AdView;
 
 import java.util.ArrayList;
 
+import sjy.policenewproject.common.Check_Preferences;
 import sjy.policenewproject.obj.Tableobj;
 
 public class LockScreenActivity extends Activity implements CaulyAdViewListener {
@@ -33,6 +37,8 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 	LinearLayout oxonlybar;
 	LinearLayout view;
 	int random_index;
+	private AdView adPieView;
+
 	private Typeface ttf;
 	@Override
 	public void onResume() {
@@ -45,6 +51,11 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lockscreen);
 
+		AdPieSDK.getInstance().initialize(getApplicationContext(), getString(R.string.mid));
+
+
+		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
+		adPieView = (AdView) findViewById(R.id.ad_view);
 
 		adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
 		view = (LinearLayout) findViewById(R.id.view);
@@ -72,6 +83,31 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 
 		setSetting();
 
+	}
+	private void initAdpie() {
+		xmlAdView.setVisibility(View.GONE);
+		// Insert your AdPie-Slot-ID
+		adPieView.setSlotId(getString(R.string.banner_sid));
+		adPieView.setAdListener(new AdView.AdListener() {
+
+			@Override
+			public void onAdLoaded() {
+				Log.e("SKY", "AdView onAdLoaded");
+			}
+
+			@Override
+			public void onAdFailedToLoad(int errorCode) {
+				Log.e("SKY", "AdView onAdFailedToLoad "	+ AdPieError.getMessage(errorCode));
+
+			}
+
+			@Override
+			public void onAdClicked() {
+				Log.e("SKY", "AdView onAdClicked");
+
+			}
+		});
+		adPieView.load();
 	}
 	private void initCauly(){
 		Log.e("SKY" , "-- initCauly --");
@@ -187,7 +223,11 @@ public class LockScreenActivity extends Activity implements CaulyAdViewListener 
 	private void setSetting() {
 		int random = (int) (Math.random() * 3);
 		SELECT_DB(random);
-		initCauly();
+		if (Check_Preferences.getAppPreferences(this , "adview").equals("cauly")){
+			initCauly();
+		}else{
+			initAdpie();
+		}
 	}
 	private void SELECT_DB(int random) // 디비 값 조회해서 저장하기
 	{
