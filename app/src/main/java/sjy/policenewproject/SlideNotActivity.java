@@ -52,6 +52,17 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 		xmlAdView = (CaulyAdView) findViewById(R.id.xmladview);
 		adPieView = (AdView) findViewById(R.id.ad_view);
 
+
+		// CloseAd 초기화
+		CaulyAdInfo closeAdInfo = new CaulyAdInfoBuilder("U6yUgNCr").build();
+		mCloseAd = new CaulyCloseAd();
+		/*
+		 * Optional //원하는 버튼의 문구를 설젇 할 수 있다. mCloseAd.setButtonText("취소", "종료");
+		 * //원하는 텍스트의 문구를 설젇 할 수 있다. mCloseAd.setDescriptionText("종료하시겠습니까?");
+		 */
+		mCloseAd.setAdInfo(closeAdInfo);
+		mCloseAd.setCloseAdListener(this);
+
 		if (Check_Preferences.getAppPreferences(this , "adview").equals("cauly")){
 			initCauly();
 		}else{
@@ -108,15 +119,7 @@ public class SlideNotActivity extends Activity implements CaulyAdViewListener , 
 	private void initCauly(){
 		adPieView.setVisibility(View.GONE);
 
-		// CloseAd 초기화
-		CaulyAdInfo closeAdInfo = new CaulyAdInfoBuilder("U6yUgNCr").build();
-		mCloseAd = new CaulyCloseAd();
-		/*
-		 * Optional //원하는 버튼의 문구를 설젇 할 수 있다. mCloseAd.setButtonText("취소", "종료");
-		 * //원하는 텍스트의 문구를 설젇 할 수 있다. mCloseAd.setDescriptionText("종료하시겠습니까?");
-		 */
-		mCloseAd.setAdInfo(closeAdInfo);
-		mCloseAd.setCloseAdListener(this);
+
 		// 선택사항: XML의 AdView 항목을 찾아 Listener 설정
 		xmlAdView.setAdViewListener(this);
 

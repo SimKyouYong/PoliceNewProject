@@ -41,12 +41,12 @@ public class IntroActivity extends FragmentActivity {
 	CommonUtil dataSet = CommonUtil.getInstance();
 	float local_Ver, Server_Ver;
 	private static String[] PERMISSIONS_STORAGE = {
-			Manifest.permission.READ_CONTACTS,
-			Manifest.permission.READ_PHONE_STATE,
-			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
 
 
-	};
+    };
 
 
 	private static final int DELAY_TIME = 3000;
@@ -150,7 +150,7 @@ public class IntroActivity extends FragmentActivity {
 
 			int count = 0;
 			try {
-				String str = dataSet.SERVER + "police_db.db";
+				String str = dataSet.SERVER + "police_db160110.db";
 				String DEFAULT_FILE_PATH = dataSet.Local_Path + "/police_db.db";
 				Log.e("SKY", "STR :: " + str);
 				
